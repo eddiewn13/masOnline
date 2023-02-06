@@ -3,17 +3,8 @@ import DeckClass from './DeckClass'
 
 function App() {
   let Deck = new DeckClass()
-  Deck.GenerateDeck();
-
-
-  let test = document.getElementsByClassName("test")
-
-  let Dinhand = []
-  function func(){
-      Dinhand.push(Deck.GiveCard())
-      console.log(Dinhand)
-      console.log(Deck.deck)
-  }
+  console.log(Deck.GiveCard())
+  console.log(Deck)
   return (
    <div>
       <button type="submit" onClick={() => func()}>Button</button>
