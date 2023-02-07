@@ -1,6 +1,7 @@
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
-import DeckClass from './DeckClass'
+import DeckClass from './utilities/DeckClass'
+import roomCreation from './utilities/randomCodeGenerator'
 const socket = io.connect("http://127.0.0.1:3001");
 
 function App() {
@@ -10,16 +11,16 @@ function App() {
         socket.emit("send_message", { message });
   };
 
+
+  console.log(roomCreation(10))
+  let Deck = new DeckClass()
+  console.log(Deck)
+
   useEffect(() => {
         socket.on("receive_message", (data) => {
               setMessageReceived(data.message);
         });
   }, [socket]);
-
-
-
-  let Deck = new DeckClass()
-  console.log(Deck)
 
   return (
     <div className="App">
