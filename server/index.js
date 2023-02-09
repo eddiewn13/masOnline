@@ -10,19 +10,22 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
       cors: {
-            origin: "http://127.0.0.1:5173",
+            origin: "http://127.0.0.1:5174",
             methods: ["GET", "POST"],
       },
 });
 
 io.on('connection', (socket) => {
-      console.log(`User Connected: ${socket.id}`);
 
-      socket.on("send_message", (data) => {
-            socket.broadcast.emit("receive_message", data )
+      socket.on("join_room", (data) => {
+            socket.join(data);
+            console.log(`User Connected: ${socket.id}` + " to " + data);
+
       })
+      // console.log(`User Connected: ${socket.id}`);
 
 })
+
 
 server.listen(3001, () => {
       console.log("SERVER IS RUNNING");
