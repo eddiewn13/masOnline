@@ -1,15 +1,16 @@
 import io from "socket.io-client";
 import { Route, Routes } from 'react-router-dom'
-import Homepage from "./components/Homepage";
 import Game from "./components/Game";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="App">
+    <div className="relative ">
       <Routes>
-        <Route path='/' element={<Homepage />} />
-        <Route path='/play' element={<Game />} />
+        <Route path='/' element={<Navbar />} />
+        <Route path='/' element={<Game />} />
       </Routes>
+      <Game/>
     </div>
 
   )
