@@ -40,7 +40,7 @@ export default function Navbar() {
                               <input type="button" value="Sign up" className="rounded-[15px] bg-[#90EE90] py-[3px] w-full"/>
                         </div>
                   </div>
-                  <div className="flex flex-col justify-center items-center w-fit bg-[red]">
+                  <div className=" ">
                               <h1>Enter lobby code</h1>
                               <input 
                                     type='text' 

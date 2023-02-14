@@ -5,12 +5,11 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="relative ">
+    <div className="App" >
       <Routes>
         <Route path='/' element={<Navbar />} />
-        <Route path='/' element={<Game />} />
+        <Route path='/play' element={<Game />} />
       </Routes>
-      <Game/>
     </div>
 
   )
