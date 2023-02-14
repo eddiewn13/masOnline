@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { io } from "socket.io-client"
 import DeckClass from "../utilities/DeckClass"
 import { Link } from 'react-router-dom'
+import queryString from 'query-string'
 
 
 
 
 
-export default function Game(){
-              
+
+const Game = ( props ) => {
+      var code = window.location.href
+
+      console.log(code)
+
+const[room, setRoom] = useState(code)
+const[roomFull, setRoomFull] = useState(false)
 const [gameOver, setGameOver] = useState();
 const [player1Deck, setPlayer1Deck] = useState([]);
 const [player1FlippedCards, setPlayer1FlippedCards ] = useState([]);
@@ -28,13 +35,14 @@ const[users,setUsers] = useState([])
 const[turn, setTurn] = useState()
 const [currentValue, setCurrentValue] = useState('')
 
-
+let socket
 
 
       useEffect(() => {
             const shuffledCards = new DeckClass();
 
             console.log(shuffledCards)
+            
 
             const player1Deck = shuffledCards.deck.splice(0, 3);
             const player2Deck = shuffledCards.deck.splice(0, 3);
@@ -47,26 +55,58 @@ const [currentValue, setCurrentValue] = useState('')
             console.log(...player4Deck);
 
             console.log(shuffledCards)
-            let socket = io.connect("http://127.0.0.1:3001")
+            socket = io.connect("http://127.0.0.1:3001")
 
-            socket.emit('join_room', {room: room}, (error) => {
+            socket.emit('join_room', room, (error) => {
                   if(error)
                   setRoomFull(true);
             })
+
+            socket.emit('initGameState', {
+                  gameOver: false,
+                  turn: 'Player 1',
+                  player1Deck: [...player1Deck],
+                  player1FlippedCards: [],
+                  player2Deck: [...player2Deck],
+                  player2FlippedCards: [],
+                  player3Deck: [...player3Deck],
+                  player3FlippedCards: [],
+                  player4Deck: [...player4Deck],
+                  player4FlippedCards: [],
+                  playedCardsPile: [],
+            })
         }, [])
+
+        useEffect(() => {
+            socket.on('initGameState', {})
+        },[])
+
 
 
 
 
       return(
             <div>
-                  <h1>hej</h1>
-                  <button>Play card</button>
-                  <br />
-                  <br />
-                  <button>Chance card</button>
+                        {(roomFull == true) ? 
+                        (
+                        <div>
+                              <h1>hej</h1>
+                              <button>Play card</button>
+                              <br />
+                              <br />
+                              <button>Chance card</button>
+                        </div>
 
-
-            </div>
-      )
+                  ) : (
+                              <div>
+                                    <h1>Room starting</h1>
+                              </div>
+                        )
+                  }
+                  </div>
+            
+      )     
 }
+
+
+export default Game;

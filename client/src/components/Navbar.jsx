@@ -13,14 +13,6 @@ export default function Navbar() {
 
       const [roomCode, setRoomCode] = useState('');
 
-      const joinRoom = () =>{
-                  socket.emit("join_room", roomCode);
-      }
-
-      const createRoom = () => {
-            socket.emit("join_room", createCode);
-      }
-
       return(
 
             <section className="flex  top-0 z-50 h-full absolute left-0">
@@ -51,9 +43,9 @@ export default function Navbar() {
                                     />
                               <Link to={`/play?roomCode=${roomCode}`}>
                                     <button 
-                                          className="" 
-                                          onClick={joinRoom}>
+                                          className=""> 
                                           JOIN GAME
+                                          
                                     </button>
                                           </Link>
 
@@ -61,7 +53,7 @@ export default function Navbar() {
                               <Link to={`/play?roomCode=${createCode}`}>
                                     <button 
                                           className="game-button orange"
-                                          onClick={createRoom}>
+                                          >
                                           CREATE GAME
                                     </button>
                                     </Link>

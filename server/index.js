@@ -18,20 +18,26 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
       socket.on("join_room", (payload, callback) => {
-            let numberOfUsersInRoom = getUsersInRoom(payload.room).length
 
-            const { error, newUser } = addUser({
+            let numberOfUsersInRoom = getUsersInRoom(payload).length
+
+            console.log("payload: " + payload)
+            
+            const {error, newUser } = addUser({
                 id: socket.id,
                 name: numberOfUsersInRoom===0 ? 'Player 1' : 'Player 2',
-                room: payload.room
+                room: payload
             })
 
+            if(error){
+                  return callback(error)
+            }
         socket.join(newUser.room)
         
         io.to(newUser.room).emit('roomData', {room: newUser.room, users: getUsersInRoom(newUser.room)})
         socket.emit('currentUserData', {name: newUser.name})
       
-        console.log(`User Connected: ${socket.id}` + " to " + payload);
+        console.log(`User Connected: ${socket.id}` + " to " + newUser.room); 
       
         
       })
