@@ -10,7 +10,7 @@ export default function Game(){
 
 
       return(
-            <div>
+            <div className='bg-black text-white'>
                   <h1>It works??</h1>
             </div>
       )
