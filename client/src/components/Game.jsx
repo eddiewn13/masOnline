@@ -90,11 +90,9 @@ let socket
                         {(roomFull == true) ? 
                         (
                         <div>
-                              <h1>hej</h1>
-                              <button>Play card</button>
-                              <br />
-                              <br />
-                              <button>Chance card</button>
+                              <div className="">
+
+                              </div>
                         </div>
 
                   ) : (
