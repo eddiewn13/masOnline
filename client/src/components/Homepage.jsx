@@ -26,17 +26,18 @@ export default function Homepage() {
                         <input 
                               type='text' 
                               placeholder='Game Code...' 
+                              value={roomCode}
                               onChange={(event) => {
                               setRoomCode(event.target.value)
                               }} 
-                              />
+                         />
                         <Link to={`/play?roomCode=${roomCode}`}>
                               <button 
                                     className="game-button green" 
                                     onClick={joinRoom}>
                                     JOIN GAME
                               </button>
-                                    </Link>
+                         </Link>
 
                         
                         <Link to={`/play?roomCode=${createCode}`}>
